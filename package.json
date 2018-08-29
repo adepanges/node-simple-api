@@ -1,0 +1,25 @@
+{
+  "name": "simple-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adepanges/node-simple-api.git"
+  },
+  "author": "Ade Pangestu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adepanges/node-simple-api/issues"
+  },
+  "homepage": "https://github.com/adepanges/node-simple-api#readme",
+  "devDependencies": {
+    "nodeman": "^1.1.2"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
