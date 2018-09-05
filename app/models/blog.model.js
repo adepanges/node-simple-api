@@ -1,11 +1,11 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const BlogSchema = mongoose.Schema({
-    title: String,
-    slug: String,
-    content: String
+	title: String,
+	slug: String,
+	content: String,
 }, {
-    timeStamps: true
-})
+	timeStamps: true,
+});
 
-module.exports = mongoose.model('Blog', BlogSchema)
+module.exports = mongoose.model('Blog', BlogSchema);

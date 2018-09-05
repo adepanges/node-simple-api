@@ -1,0 +1,14 @@
+{
+    "extends" : "es2015",
+    "rules": {
+        "indent": [1, "tab"],
+        "allow": ["log", "warn", "error"]
+    },
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
+    "globals": {
+        "BASE_PATH": true,
+        "APP_PATH": true
+    }
+}
