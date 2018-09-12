@@ -14,7 +14,7 @@ module.exports = (app) => {
 	// app.use(rid());
 
 	app.use((req, res, next) => {
-		console.log('HTTP Request ', Date.now(),' ');
+		logger.http('HTTP Request');
 		next();
 	});
 	// --------------- END middleware ---------------
@@ -29,9 +29,8 @@ module.exports = (app) => {
 		});
 	});
 
-	require('./v1')(app);
+	loadRouter('all')(app);
 
-	// Error handler
 	app.use((err, req, res, next) => {
 		const { start, httpStatus, message, previousError, stack } = err
 		res.status(httpStatus || 406).json({
