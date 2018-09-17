@@ -1,5 +1,4 @@
 const express = require('express');
-const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
 
 
@@ -8,16 +7,18 @@ global.APP_PATH = `${__dirname}/app`;
 global.PORT = 3000;
 
 global.loadApp = (moduleName) => { return require(`${APP_PATH}/${moduleName}`) };
+global.loadMiddleware = (middlewareName) => { return loadApp(`middleware/${middlewareName}.middleware`) };
 global.loadController = (controllerName) => { return loadApp(`controllers/${controllerName}.controller`) };
 global.loadModel = (modelName) => { return loadApp(`models/${modelName}.model`) };
 global.loadHelper = (helperName) => { return loadApp(`helpers/${helperName}.helper`) };
 global.loadRouter = (routerName) => { return loadApp(`routes/${routerName}.route`) };
 global.loadLib = (libName) => { return require(`${BASE_PATH}/libs/${libName}`) };
 global.logger = loadLib('logger')
+global.config = require('./config')
 
 mongoose.Promise = global.Promise;
 // Connecting to the database
-mongoose.connect(dbConfig.url, {
+mongoose.connect(config.database.mongo_url, {
 	useNewUrlParser: true,
 }).then(() => {
 	logger.debug('Successfully connected to the database');
@@ -27,8 +28,9 @@ mongoose.connect(dbConfig.url, {
 	process.exit();
 });
 
+// create express appx
 const app = express();
-// create express app
+// load router
 loadApp('routes')(app)
 // listen for requests
 app.listen(PORT, () => {
