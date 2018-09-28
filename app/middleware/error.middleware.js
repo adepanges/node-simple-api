@@ -1,12 +1,11 @@
-const bodyParser = require('body-parser');
-const rid = require('connect-rid');
-const responseTime = require('response-time')
-
 module.exports = (app) => {
-	app.use((req, res, next) => {
-		var protocol = String(req.protocol).toUpperCase(),
-			hostname = req.hostname;
-		if(protocol == 'HTTP') logger.http(`[${req.method}] ${hostname} ${req.url}`);
-		next();
-	});
+	app.use((err, req, res, next) => { 
+		const { start, httpStatus, message, previousError, stack } = err 
+		res.status(httpStatus || 406).json({ 
+			status: false, 
+			code: httpStatus || 406, 
+			message, 
+			data: previousError, 
+		}) 
+	})
 }

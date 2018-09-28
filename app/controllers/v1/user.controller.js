@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const User = loadModel('user');
+const User = loadModel('mongo/user');
 
 function create(req, res) {
 	if (!req.body.email || !req.body.password) {
@@ -19,12 +19,11 @@ function create(req, res) {
 
 	newUser.save()
 		.then(data => {
-			// create a token
-			var token = jwt.sign({ id: data._id }, config.secret, {
-				expiresIn: 86400 // expires in 24 hours
-			});
 			res.json({
-				data, token
+				data,
+				token: jwt.sign({ data }, config.secret, {
+					expiresIn: 86400 // expires in 24 hours
+				})
 			});
 		}).catch(err => {
 			res.status(500)
@@ -112,6 +111,7 @@ function update(req, res) {
 		});
 }
 
+// var hash = CryptoJS.SHA1("Message");
 function destroy(req, res) {
 	User.findByIdAndRemove(req.params.userId)
 		.then(user => {

@@ -1,4 +1,4 @@
-const Blog = loadModel('blog');
+const Blog = loadModel('mongo/blog');
 
 function create(req, res) {
 	if (!req.body.content || !req.body.title) {

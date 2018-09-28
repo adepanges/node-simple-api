@@ -16,4 +16,5 @@ module.exports = (app) => {
 	loadRouter('all')(app);
 
 	loadMiddleware('error')(app);
+	loadMiddleware('response')(app);
 };
