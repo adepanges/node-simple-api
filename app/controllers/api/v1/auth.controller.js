@@ -45,6 +45,10 @@ function login_dummy(req, res) {
 		});
 }
 
+function view_login(req, res, next) {
+	res.render('resources/views/home')
+}
+
 module.exports = {
 	authenticate,
 	login_dummy,

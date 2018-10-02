@@ -3,12 +3,13 @@ const flatten = require('flat');
 var routes = {
 	api: {
 		v1: {
-			auth: 'v1/auth',
-			blog: 'v1/blog',
-			joke: 'v1/joke',
-			user: 'v1/user',
+			auth: 'api/v1/auth',
+			blog: 'api/v1/blog',
+			joke: 'api/v1/joke',
+			user: 'api/v1/user',
 		}
-	}
+	},
+	auth: 'web/auth'
 };
 
 module.exports = (app) => {

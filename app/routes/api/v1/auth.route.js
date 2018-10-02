@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const auth = loadController(`v1/auth`);
-const user = loadController(`v1/user`);
+const auth = loadController(`api/v1/auth`);
+const user = loadController(`api/v1/user`);
 
 router.get('/me', auth.me);
 router.post('/login', auth.login_dummy);

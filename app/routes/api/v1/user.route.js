@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const user = loadController(`v1/user`);
+const user = loadController(`api/v1/user`);
 
 router.post('/', user.create);
 router.get('/', user.findAll);

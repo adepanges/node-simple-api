@@ -1,6 +1,9 @@
+const express = require('express');
+
 module.exports = (app) => {
 
 	loadMiddleware('request')(app);
+	app.use(express.static(BASE_PATH + '/public'))
 
 	// define a simple route
 	app.get('/', (req, res, next) => {

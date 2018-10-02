@@ -1,7 +1,7 @@
 const bodyParser = require('body-parser');
 const responseTime = require('response-time')
 
-global.authenticate = loadController(`v1/auth`).authenticate;
+// global.authenticate = loadController(`api/v1/auth`).authenticate;
 
 module.exports = (app) => {
 	

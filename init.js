@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+var exphbs  = require('express-handlebars');
 
-module.exports = () => {
+module.exports = (app) => {
 	global.loadApp = (moduleName) => { return require(`${APP_PATH}/${moduleName}`) };
 	global.loadMiddleware = (middlewareName) => { return loadApp(`middleware/${middlewareName}.middleware`) };
 	global.loadController = (controllerName) => { return loadApp(`controllers/${controllerName}.controller`) };
@@ -11,6 +12,15 @@ module.exports = () => {
 	global.logger = loadLib('logger')
 	global.config = require('./config')
 
+	app.set('views', BASE_PATH + '/resources/views/');
+	app.engine('hbs', exphbs({
+		defaultLayout: 'main', 
+		extname: '.hbs',
+		layoutsDir:'resources/views/layouts',
+		partialsDir:'resources/views/partials'
+	}));
+	app.set('view engine', 'hbs');
+
 	mongoose.Promise = global.Promise;
 	// Connecting to the database
 	mongoose.connect(config.database.mongo_url, {
@@ -19,7 +29,7 @@ module.exports = () => {
 		logger.debug('Successfully connected to the database');
 	}).catch(err => {
 		logger.info(err);
-		logger.debug('Could not connect to the database. Exiting now...');
+		logger.debug('Could not connect to the mongo database. Exiting now...');
 		process.exit();
 	});
 }
